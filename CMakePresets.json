@@ -1,0 +1,68 @@
+{
+    "version": 5,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 25,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "Base",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install"
+            }
+        },
+        {
+            "name": "Windows_Base",
+            "binaryDir": "${sourceDir}/build",
+            "generator": "Visual Studio 17 2022",
+            "inherits": "Base",
+            "condition": {
+                "type": "inList",
+                "string": "${hostSystemName}",
+                "list": [
+                    "Windows"
+                ]
+            },
+            "cacheVariables": {
+                "HOUDINI_BASE": "C:/Program Files/Side Effects Software/Houdini 20.0.688"
+            }
+        },
+        {
+            "name": "Linux_Base",
+            "binaryDir": "${sourceDir}/build",
+            "generator": "Ninja Multi-Config",
+            "inherits": "Base",
+            "condition": {
+                "type": "inList",
+                "string": "${hostSystemName}",
+                "list": [
+                    "Linux"
+                ]
+            },
+            "environment": {
+                "CC":"/opt/rh/gcc-toolset-12/root/usr/bin/gcc",
+                "CXX": "/opt/rh/gcc-toolset-12/root/usr/bin/g++"
+            },  
+            "cacheVariables": {
+                "HOUDINI_BASE": "/opt/hfs20.0.688/"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "WinDefault",
+            "configurePreset": "Windows_Base",
+			"displayName": "Windows_Default",
+			"configuration": "RelWithDebInfo"
+        },
+        {
+            "name": "LinuxDefault",
+            "configurePreset": "Linux_Base",
+            "displayName": "Linux_Default",
+            "configuration": "RelWithDebInfo"
+        }
+    ]
+}

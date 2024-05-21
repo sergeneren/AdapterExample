@@ -1,0 +1,21 @@
+{
+    "Plugins": [
+        {
+            "Info": {
+                "Types": {
+                    "MyCustomAdapter": {
+                        "bases": [
+                            "UsdImagingGprimAdapter"
+                        ],
+                        "primTypeName":"MyCustomPrim"
+                    }
+                }
+            },
+            "LibraryPath": "../AdapterExample.dll",
+            "Name": "AdapterExample",
+            "ResourcePath": "resources",
+            "Root": "..",
+            "Type": "library"
+        }
+    ]
+}
